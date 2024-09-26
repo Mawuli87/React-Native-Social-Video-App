@@ -1,7 +1,7 @@
 # Welcome to My Social Video Expo app 👋
 
-<img src = "screenshots/Screenshot_20240926_101926_Expo.jpg" height="400">
-<img src = "screenshots/Screenshot_20240926_101933_Expo.jpg" height="400">
+<img src = "screenshots/Screenshot_20240926_101926_Expo.jpg">
+<img src = "screenshots/Screenshot_20240926_101933_Expo.jpg">
 ## Get started
 
 1. Install dependencies
