@@ -11,12 +11,13 @@ import {
 } from "react-native";
 
 import { images } from "../../constants";
-//import { createUser } from "../../lib/appwrite";
 import { CustomButton, FormField } from "../../components";
-//import { useGlobalContext } from "../../context/GlobalProvider";
+import { createUser } from "../../lib/appwrite";
+
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignUp = () => {
-  //const { setUser, setIsLogged } = useGlobalContext();
+  const { setUser, setIsLogged } = useGlobalContext();
 
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -31,17 +32,17 @@ const SignUp = () => {
     }
 
     setSubmitting(true);
-    // try {
-    //   const result = await createUser(form.email, form.password, form.username);
-    //   setUser(result);
-    //   setIsLogged(true);
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLogged(true);
 
-    //   router.replace("/home");
-    // } catch (error) {
-    //   Alert.alert("Error", error.message);
-    // } finally {
-    //   setSubmitting(false);
-    // }
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

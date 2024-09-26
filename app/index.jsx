@@ -1,17 +1,30 @@
-import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../constants";
-import CustomButton from "../components/CustomButton";
+import { Redirect, router } from "expo-router";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 
-export default function App() {
+import { images } from "../constants";
+import { CustomButton, Loader } from "../components";
+import { useGlobalContext } from "../context/GlobalProvider";
+import { signOut } from "../lib/appwrite";
+
+const Welcome = () => {
+  const { loading, isLogged } = useGlobalContext();
+
+  //if (!loading && isLogged) return <Redirect href="/home" />;
+  if (!loading) return <Redirect href="/home" />;
+
   return (
-    <SafeAreaView>
-      {/* <Loader isLoading={loading} /> */}
+    <SafeAreaView className="bg-primary h-full">
+      <Loader isLoading={loading} />
 
       <ScrollView
-        className="bg-primary h-full"
         contentContainerStyle={{
           height: "100%",
         }}
@@ -33,7 +46,7 @@ export default function App() {
             <Text className="text-3xl text-white font-bold text-center">
               Discover Endless{"\n"}
               Possibilities with{" "}
-              <Text className="text-secondary-200">Mawuli</Text>
+              <Text className="text-secondary-200">Aora</Text>
             </Text>
 
             <Image
@@ -53,10 +66,18 @@ export default function App() {
             handlePress={() => router.push("/sign-in")}
             containerStyles="w-full mt-7"
           />
+          <Pressable
+            onPress={signOut}
+            className="bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center"
+          >
+            <Text>Sign out</Text>
+          </Pressable>
         </View>
       </ScrollView>
 
       <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
-}
+};
+
+export default Welcome;

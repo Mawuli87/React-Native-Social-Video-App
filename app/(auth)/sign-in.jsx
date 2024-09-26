@@ -14,12 +14,11 @@ import {
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
 import { StatusBar } from "expo-status-bar";
-
-//import { getCurrentUser, signIn } from "../../lib/appwrite";
-//import { useGlobalContext } from "../../context/GlobalProvider";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
-  // const { setUser, setIsLogged } = useGlobalContext();
+  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -33,19 +32,19 @@ const SignIn = () => {
 
     setSubmitting(true);
 
-    // try {
-    //   await signIn(form.email, form.password);
-    //   const result = await getCurrentUser();
-    //   setUser(result);
-    //   setIsLogged(true);
+    try {
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLogged(true);
 
-    //   Alert.alert("Success", "User signed in successfully");
-    //   router.replace("/home");
-    // } catch (error) {
-    //   Alert.alert("Error", error.message);
-    // } finally {
-    //   setSubmitting(false);
-    // }
+      Alert.alert("Success", "User signed in successfully");
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
